@@ -1,0 +1,5 @@
+node_modules/
+.wrangler/
+
+# Superseded single-file version of the site (kept on disk as a backup only).
+loaded-scone-co-index.html
