@@ -1,9 +1,11 @@
 # The Loaded Scone Co.
 
-Static Cloudflare Pages site for The Loaded Scone Co., 1 St Georges Arcade, Falmouth.
+Static site for The Loaded Scone Co., 1 St Georges Arcade, Falmouth, deployed to
+Cloudflare as a **Worker with static assets** (the successor to Cloudflare Pages —
+same idea, current product).
 
 `public/` is the deploy root — everything in it is served at the site root, nothing
-outside it is published.
+outside it is published. There is no Worker script; files are served directly.
 
 ```
 public/
@@ -14,7 +16,7 @@ public/
   script.js               one script, shared by every page
   robots.txt
   sitemap.xml
-  _headers                cache + security headers (Cloudflare Pages)
+  _headers                cache + security headers (parsed by Cloudflare, not served)
   images/                 all photography and logos
   audio/witch-laugh.mp3   the "What's On" spooky reveal sound
 ```
@@ -28,30 +30,42 @@ npm install
 npm run dev
 ```
 
-Serves at `http://localhost:8788` by default (`npm run dev -- --port 8797` to pick a port).
-This runs Cloudflare's own Pages runtime, so `/menu/`, the 404 page and `_headers` all
-behave exactly as they will in production.
+Serves at `http://localhost:8787` by default (`npm run dev -- --port 8796` to pick a port).
+This runs Cloudflare's own runtime, so `/menu/`, the 404 page and `_headers` all behave
+exactly as they will in production.
 
 ## Deploying
 
-### Option A — Git integration (recommended)
+### Git integration (how this is set up)
 
-Push this repo to GitHub, then in the Cloudflare dashboard:
+The Cloudflare project is connected to `manflutube-afk/the-loaded-scone`. Every push to
+`main` builds and deploys automatically; other branches get preview URLs.
 
-1. **Workers & Pages → Create → Pages → Connect to Git**, and pick this repository.
-2. **Build command:** leave empty (there is no build step).
-3. **Build output directory:** `public`
-4. Deploy.
+The build configuration in the Cloudflare dashboard is:
 
-Every push to `main` then publishes automatically, and pull requests get preview URLs.
-`wrangler.toml` already sets `pages_build_output_dir = "public"`, so Cloudflare picks
-the output directory up on its own.
+| Field | Value |
+| --- | --- |
+| Build command | *(none)* |
+| Deploy command | `npx wrangler deploy` |
+| Version command | `npx wrangler versions upload` |
+| Root directory | `/` |
 
-### Option B — Direct upload from this machine
+There is no build step — `wrangler deploy` just uploads `public/`. All the routing
+configuration lives in `wrangler.toml`, so the dashboard needs nothing else.
+
+### Deploying by hand
 
 ```bash
 npm run deploy
 ```
+
+### A note on Pages vs Workers
+
+This started out configured for Cloudflare Pages (`pages_build_output_dir`), but the
+dashboard now creates **Workers** projects by default, and `wrangler deploy` refuses a
+Pages config — which is what made the first build fail. `wrangler.toml` now uses the
+Workers `[assets]` block instead. Behaviour is the same, `_headers` and `_redirects`
+are supported either way, and Workers is the actively developed product.
 
 ## The menu page
 
