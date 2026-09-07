@@ -23,7 +23,16 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+/* `overflow-x: hidden` here would turn html/body into a scroll container and
+   silently break every `position: sticky` on the site (the header and the menu
+   tab bar). `clip` stops sideways scrolling without that side effect; the
+   `hidden` line above it is the fallback for browsers that lack `clip`. */
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -31,8 +40,9 @@ body {
   background: var(--cream);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
   width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 img { max-width: 100%; display: block; }
