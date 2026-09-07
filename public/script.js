@@ -5,6 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Publish the real sticky-header height as --header-h, so the sticky menu tab
+  // bar sits flush under it and tab switching scrolls to exactly the right spot.
+  const siteHeader = document.querySelector('.site-header');
+  const syncHeaderHeight = () => {
+    if (!siteHeader) return;
+    const h = Math.round(siteHeader.getBoundingClientRect().height);
+    if (h) document.documentElement.style.setProperty('--header-h', h + 'px');
+  };
+  syncHeaderHeight();
+  window.addEventListener('resize', syncHeaderHeight);
+
   // Mobile nav toggle
   const navToggle = document.getElementById('nav-toggle');
   const mainNav = document.getElementById('main-nav');
@@ -38,8 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.setAttribute('aria-selected', 'true');
     panel.classList.add('active');
     if (scroll) {
-      const tabs = document.getElementById('menu-tabs');
-      if (tabs) tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Jump to the top of the newly chosen section. The anchor sits in normal
+      // flow just above the (sticky) tab bar, so its position is stable whether
+      // or not the bar is currently stuck, and its scroll-margin-top clears the
+      // header. Instant rather than smooth: the panel content has already
+      // swapped, so animating a long way down the old panel just looks broken.
+      const anchor = document.getElementById('menu-anchor');
+      if (anchor) anchor.scrollIntoView({ behavior: 'instant', block: 'start' });
     }
     return true;
   };
@@ -47,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const name = btn.getAttribute('data-tab');
-      if (activateTab(name, false) && window.history && window.history.replaceState) {
+      if (activateTab(name, true) && window.history && window.history.replaceState) {
         window.history.replaceState(null, '', '#' + name);
       }
     });

@@ -14,6 +14,9 @@
   --white: #ffffff;
   --text-muted: #cfc9be;
   --radius: 14px;
+  /* Height of the sticky site header. JS keeps this in sync with the real
+     measured height; this value is the pre-JS fallback. */
+  --header-h: 72px;
   --shadow: 0 20px 50px rgba(0,0,0,0.25);
   --font-display: 'Playfair Display', serif;
   --font-body: 'Poppins', sans-serif;
@@ -250,12 +253,28 @@ p { margin: 0 0 1em; }
 .menu .eyebrow { color: var(--gold-light); }
 .menu .section-title { color: var(--white); }
 
+/* The tab bar sticks directly under the site header, so you can switch between
+   menu sections without scrolling back up. Negative margins let its background
+   span the full container width and hide the cards passing underneath. */
 .menu-tabs {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin: 30px 0 50px;
+  margin: 30px -24px 50px;
+  padding: 14px 24px;
+  position: sticky;
+  top: var(--header-h);
+  z-index: 90;
+  background: var(--black);
+  border-bottom: 1px solid rgba(217,164,34,0.18);
+}
+
+/* Zero-height marker in normal flow, just above the tab bar. Switching tabs
+   scrolls here, so the new section always starts at the top. */
+.menu-anchor {
+  height: 0;
+  scroll-margin-top: var(--header-h);
 }
 .tab-btn {
   background: transparent;
@@ -794,4 +813,16 @@ p { margin: 0 0 1em; }
   .menu-preview-grid { grid-template-columns: 1fr; }
   .menu-preview { padding: 70px 0; }
   .menu-page { padding-top: 40px; }
+
+  /* One scrollable row rather than three wrapped rows of sticky buttons. */
+  .menu-tabs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 12px 24px;
+  }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: 0 0 auto; }
 }
