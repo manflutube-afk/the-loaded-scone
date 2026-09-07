@@ -2,10 +2,10 @@
 
 Website for The Loaded Scone Co., 1 St Georges Arcade, Falmouth.
 
-Built with [Astro](https://astro.build) and deployed to Cloudflare as a **Worker with
-static assets**. `npm run build` turns `src/` into pre-rendered HTML in `dist/`, and
-Cloudflare serves that. Pages are built ahead of time, so they load as fast as plain
-HTML — the build exists so the source stays maintainable, not to slow anything down.
+Built with [Astro](https://astro.build) and deployed to **Cloudflare Pages**.
+`npm run build` turns `src/` into pre-rendered HTML in `dist/`, and Cloudflare serves
+that. Every page is built ahead of time, so they load as fast as plain HTML — the build
+exists so the source stays maintainable, not to slow anything down.
 
 ```
 src/
