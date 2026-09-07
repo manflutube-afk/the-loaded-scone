@@ -30,7 +30,7 @@ src/
 public/                copied to the site root as-is
   images/  audio/  robots.txt  _headers
 
-dist/                  build output — git-ignored, never edit by hand
+dist/                  build output — COMMITTED to git (see Deploying), never edit by hand
 ```
 
 ## Local development
@@ -52,23 +52,37 @@ npm run build && npm run serve
 
 ## Deploying
 
-Pushing to `main` deploys automatically. The Cloudflare project is connected to
-`manflutube-afk/the-loaded-scone`; other branches get preview URLs.
+This is a **Cloudflare Pages** project (`the-loaded-scone.pages.dev`) connected to
+`manflutube-afk/the-loaded-scone`. Pushing to `main` deploys automatically.
 
-The build configuration in the Cloudflare dashboard must be:
+> ### ⚠️ Always run `npm run build` before you commit
+>
+> Cloudflare has **no build command set**, so it publishes the `dist/` folder exactly
+> as committed to git. `dist/` is therefore checked in on purpose — it is the thing
+> that gets deployed.
+>
+> ```bash
+> npm run build
+> git add -A
+> git commit -m "your change"
+> git push
+> ```
+>
+> Skip the build and your change goes into git but never reaches the live site,
+> because the committed `dist/` still holds the previous version.
 
-| Field | Value |
-| --- | --- |
-| Build command | `npm run build` |
-| Deploy command | `npx wrangler deploy` |
-| Version command | `npx wrangler versions upload` |
-| Root directory | `/` |
-
-To deploy by hand instead:
+To deploy straight from this machine without going through git:
 
 ```bash
 npm run deploy
 ```
+
+### Letting Cloudflare do the building instead
+
+Better long term, and removes the footgun above. In the project's **Build
+configuration**, set **Build command** to `npm run build`. Then `dist/` no longer
+needs to be committed — add it back to `.gitignore`, remove it with
+`git rm -r --cached dist`, and delete this section.
 
 ## Editing the menu
 

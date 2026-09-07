@@ -1,7 +1,10 @@
 node_modules/
 .wrangler/
-dist/
 .astro/
+
+# NOTE: dist/ is deliberately NOT ignored. Cloudflare Pages has no build command
+# set, so it publishes the committed build output directly. Run `npm run build`
+# before committing any change, or the live site will not reflect it.
 
 # Superseded single-file version of the site (kept on disk as a backup only).
 loaded-scone-co-index.html
