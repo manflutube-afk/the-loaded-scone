@@ -3,6 +3,7 @@
     {
       "id": "sweet",
       "label": "Sweet Scones",
+      "short": "Sweet",
       "schemaName": "Sweet Loaded Scones",
       "price": "7.95",
       "blocks": [
@@ -131,6 +132,7 @@
     {
       "id": "savoury",
       "label": "Savoury Scones",
+      "short": "Savoury",
       "schemaName": "Savoury Loaded Scones",
       "price": "8.95",
       "blocks": [
@@ -279,6 +281,7 @@
     {
       "id": "milkshakes",
       "label": "Milkshakes",
+      "short": "Shakes",
       "schemaName": "Milkshakes",
       "price": "6.95",
       "blocks": [
@@ -453,6 +456,7 @@
     {
       "id": "sundaes",
       "label": "Sundaes",
+      "short": "Sundaes",
       "schemaName": "Signature Sundaes",
       "price": "6.95",
       "blocks": [
@@ -537,6 +541,7 @@
     {
       "id": "banana-splits",
       "label": "Banana Splits",
+      "short": "Splits",
       "schemaName": "Banana Splits",
       "price": "6.95",
       "blocks": [

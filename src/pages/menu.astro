@@ -55,7 +55,10 @@ const schema = {
             role="tab"
             aria-controls={`tab-${section.id}`}
             aria-selected={i === 0 ? 'true' : 'false'}
-          >{section.label}</button>
+          >
+            <span class="tab-label-full">{section.label}</span>
+            <span class="tab-label-short">{section.short ?? section.label}</span>
+          </button>
         ))}
       </div>
 

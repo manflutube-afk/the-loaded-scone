@@ -304,6 +304,9 @@ p { margin: 0 0 1em; }
   transition: all 0.25s ease;
 }
 .tab-btn:hover { border-color: var(--gold); color: var(--white); }
+/* Each tab carries a full label and a short one for narrow screens; exactly one
+   is displayed, so assistive tech announces a single name per tab. */
+.tab-label-short { display: none; }
 .tab-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); }
 
 .tab-panel { display: none; animation: fadeIn 0.4s ease; }
@@ -829,15 +832,23 @@ p { margin: 0 0 1em; }
   .menu-preview { padding: 70px 0; }
   .menu-page { padding-top: 40px; }
 
-  /* One scrollable row rather than three wrapped rows of sticky buttons. */
+  /* Every category has to be reachable in one tap, so nothing here scrolls
+     sideways: the short labels let all five sit on a single row at 375px, and
+     on anything narrower they wrap to two rows rather than hiding offscreen. */
   .menu-tabs {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding: 12px 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 8px;
   }
-  .menu-tabs::-webkit-scrollbar { display: none; }
-  .tab-btn { flex: 0 0 auto; }
+  .tab-btn {
+    flex: 0 0 auto;
+    /* Horizontal padding is tight so all five fit one row at 375px; vertical
+       padding is generous so each stays a comfortable tap target. */
+    padding: 12px 9px;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+  }
+  .tab-label-full { display: none; }
+  .tab-label-short { display: inline; }
 }
