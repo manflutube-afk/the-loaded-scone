@@ -1,11 +1,7 @@
-# Workers project serving Astro's build output as static assets.
-# `npm run build` produces dist/; `wrangler deploy` uploads it.
+# Cloudflare Pages project — the-loaded-scone.pages.dev
+# `npm run build` (Astro) produces dist/; Pages publishes that directory.
+# Pages serves dist/404.html for unmatched paths and resolves /menu/ to
+# dist/menu/index.html automatically, so no extra routing config is needed.
 name = "the-loaded-scone"
 compatibility_date = "2026-09-07"
-
-[assets]
-directory = "./dist"
-# Serve dist/404.html for anything that doesn't match a file.
-not_found_handling = "404-page"
-# /menu/ resolves to dist/menu/index.html.
-html_handling = "auto-trailing-slash"
+pages_build_output_dir = "dist"
