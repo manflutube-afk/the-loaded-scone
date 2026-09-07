@@ -1,9 +1,17 @@
 {
   "name": "the-loaded-scone",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "serve": "wrangler dev",
+    "deploy": "astro build && wrangler deploy"
+  },
+  "dependencies": {
+    "astro": "^5.18.2"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"

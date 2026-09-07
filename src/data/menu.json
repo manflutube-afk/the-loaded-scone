@@ -1,0 +1,643 @@
+{
+  "sections": [
+    {
+      "id": "sweet",
+      "label": "Sweet Scones",
+      "schemaName": "Sweet Loaded Scones",
+      "price": "7.95",
+      "blocks": [
+        {
+          "type": "intro",
+          "heading": "Sweet Loaded Scones",
+          "price": "£7.95",
+          "paragraphs": [
+            {
+              "text": "All our scones are made fresh to order with real Cornish clotted cream. Jam first, always."
+            }
+          ],
+          "included": [
+            "Freshly Baked Giant Scone",
+            "Cornish Clotted Cream",
+            "Premium Cornish Fillings & Toppings"
+          ]
+        },
+        {
+          "type": "cards",
+          "cols": 2,
+          "items": [
+            {
+              "num": "1",
+              "name": "The Classic Cornish",
+              "desc": "Strawberry jam, Cornish clotted cream, fresh strawberries."
+            },
+            {
+              "num": "2",
+              "name": "Falmouth Chocolate Fantastica",
+              "desc": "Chocolate cream, Cornish clotted cream, chocolate shavings."
+            },
+            {
+              "num": "3",
+              "name": "Kynance Cove Caramel",
+              "desc": "Caramel sauce, Cornish clotted cream, honeycomb pieces, fudge pieces."
+            },
+            {
+              "num": "4",
+              "name": "Lizard Lemon Bliss",
+              "desc": "Lemon curd, Cornish clotted cream, crushed meringue."
+            },
+            {
+              "num": "5",
+              "name": "Biscoff Bay",
+              "desc": "Biscoff spread, Cornish clotted cream, Biscoff crumb."
+            },
+            {
+              "num": "6",
+              "name": "Boscastle Biscoff Apple Crumble",
+              "desc": "Biscoff apple crumble, Cornish clotted cream.",
+              "tag": "Customer Favourite",
+              "featured": true
+            },
+            {
+              "num": "7",
+              "name": "Berry Porthleven",
+              "desc": "Homemade mixed berry compote, Cornish clotted cream, fresh berries."
+            },
+            {
+              "num": "8",
+              "name": "Banoffee Bay",
+              "desc": "Toffee caramel, banana, biscuit crumb, Cornish clotted cream."
+            },
+            {
+              "num": "9",
+              "name": "Camborne Dark Cherry",
+              "desc": "Dark cherry compote, Cornish clotted cream, chocolate shavings."
+            },
+            {
+              "num": "10",
+              "name": "Pistachio Delight",
+              "desc": "Pistachio cream, crunchy pistachio kadayif, Cornish clotted cream.",
+              "tag": "★",
+              "featured": true
+            }
+          ]
+        },
+        {
+          "type": "extras",
+          "boxes": [
+            {
+              "title": "Upgrade to Roskilly's Ice Cream",
+              "price": "+£2",
+              "text": "Add a scoop of award-winning Roskilly's Cornish ice cream to your scone. Choose from our range."
+            },
+            {
+              "title": "Sweet Extras",
+              "list": [
+                {
+                  "label": "Extra Fruit (seasonal)",
+                  "price": "+£2"
+                },
+                {
+                  "label": "Extra Clotted Cream",
+                  "price": "+£2"
+                },
+                {
+                  "label": "Extra Chocolate Shavings",
+                  "price": "+£1"
+                },
+                {
+                  "label": "Extra Biscoff Crumble",
+                  "price": "+£1"
+                },
+                {
+                  "label": "Extra Honeycomb",
+                  "price": "+£1"
+                }
+              ]
+            },
+            {
+              "title": "The 50/50 Box",
+              "price": "+£2 upgrade",
+              "text": "Can't decide? Have one of each — 1 sweet loaded scone + 1 savoury loaded scone, served together in one box.",
+              "highlight": true
+            }
+          ]
+        },
+        {
+          "type": "footnote",
+          "text": "Any drink £2 with any loaded scone (excludes milkshakes) · Any 16oz milkshake £6.95 with any loaded scone (normally £7.95) · Cornish Tea £2.50"
+        }
+      ]
+    },
+    {
+      "id": "savoury",
+      "label": "Savoury Scones",
+      "schemaName": "Savoury Loaded Scones",
+      "price": "8.95",
+      "blocks": [
+        {
+          "type": "intro",
+          "heading": "House Favourites",
+          "price": "£8.95",
+          "paragraphs": [
+            {
+              "text": "All our savoury scones are made with our larger cheese scone — fully loaded like a sandwich, packed with flavour."
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "cols": 2,
+          "items": [
+            {
+              "name": "Helstonia",
+              "desc": "Cornish Yarg, Cornish charcuterie, red onion marmalade, 3 herb salad.",
+              "tag": "Best Seller",
+              "featured": true
+            },
+            {
+              "name": "Truro Big Smokey",
+              "desc": "Smoked Cornish cheddar, sundried tomatoes, 3 herb salad, pesto."
+            },
+            {
+              "name": "Tintagel Blue",
+              "desc": "Cornish blue, Cornish charcuterie, pale ale chutney, 3 herb salad."
+            },
+            {
+              "name": "St Agnes Brie",
+              "desc": "Cornish brie, red onion marmalade, sundried tomatoes, balsamic glaze."
+            },
+            {
+              "name": "Land's End Heat",
+              "desc": "Chorizo, smoked Cornish cheddar, sweet chilli jam, BBQ sauce, sundried tomatoes, roasted peppers."
+            },
+            {
+              "name": "Padstow Pesto",
+              "desc": "Cheese, onion & pesto scone, Cornish brie, crispy pancetta, sundried tomatoes, 3 herb salad, pesto, balsamic glaze."
+            },
+            {
+              "name": "Marazion Melt",
+              "desc": "Cornish brie, sundried tomatoes, red onion marmalade, crispy pancetta, balsamic glaze.",
+              "tag": "Best Seller · New",
+              "featured": true
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "heading": "Build Your Own",
+          "price": "£7.95",
+          "text": "Create your perfect loaded scone, includes: large cheese scone, choice of cheese, choice of chutney, fresh salad & choice of sauce. Add meat +£1.50.",
+          "cols": 3,
+          "steps": [
+            {
+              "num": "1",
+              "title": "Choose Your Scone",
+              "options": [
+                "Mature Cheddar (Classic)",
+                "Cheese, Onion & Pesto",
+                "Chilli Garlic Tomato"
+              ]
+            },
+            {
+              "num": "2",
+              "title": "Choose Your Cheese",
+              "options": [
+                "Cornish Cheddar",
+                "Cornish Blue",
+                "Cornish Brie",
+                "Smoked Cornish Cheddar",
+                "Cornish Yarg",
+                "Vegan Garlic & Pesto Cream Cheese",
+                "Vegan Sliced Cheese"
+              ]
+            },
+            {
+              "num": "3",
+              "title": "Choose Your Chutney",
+              "options": [
+                "Red Onion Marmalade",
+                "Sweet Chilli Jam",
+                "Pale Ale Chutney",
+                "Piccalilli"
+              ]
+            },
+            {
+              "num": "4",
+              "title": "Add Meat",
+              "price": "+£1.50",
+              "options": [
+                "Cornish Charcuterie",
+                "Crispy Pancetta",
+                "Chorizo",
+                "Prosciutto"
+              ]
+            },
+            {
+              "num": "5",
+              "title": "Choose Your Topping",
+              "options": [
+                "Sundried Tomatoes",
+                "Roasted Peppers",
+                "3 Herb Salad",
+                "Wild Rocket"
+              ]
+            },
+            {
+              "num": "6",
+              "title": "Choose Your Sauce",
+              "options": [
+                "Pesto",
+                "BBQ Sauce",
+                "Balsamic Glaze",
+                "Honey Chilli Sauce"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "extras",
+          "boxes": [
+            {
+              "title": "Any Drink",
+              "price": "£2",
+              "text": "With any loaded scone (excludes milkshakes). Cornish Tea £2.50, made fresh to order."
+            },
+            {
+              "title": "The 50/50 Box",
+              "price": "+£2",
+              "text": "1 sweet loaded scone + 1 savoury loaded scone. Can't decide? Have one of each, served together in one box.",
+              "highlight": true
+            }
+          ]
+        },
+        {
+          "type": "footnote",
+          "text": "Please allow up to 15 minutes during busy periods · Gluten-free scone and vegan options available on request · Please speak to a member of staff regarding allergies"
+        }
+      ]
+    },
+    {
+      "id": "milkshakes",
+      "label": "Milkshakes",
+      "schemaName": "Milkshakes",
+      "price": "6.95",
+      "blocks": [
+        {
+          "type": "intro",
+          "heading": "Premium Milkshakes",
+          "price": null,
+          "paragraphs": [
+            {
+              "text": "Probably the best ice cream milkshakes in the world.",
+              "class": "milkshake-tagline"
+            },
+            {
+              "text": "Made with award-winning Roskilly's Cornish ice cream."
+            }
+          ],
+          "sizes": [
+            {
+              "name": "Regular",
+              "price": "£6.95",
+              "detail": "16oz · 4 scoops of ice cream"
+            },
+            {
+              "name": "Large",
+              "price": "£7.95",
+              "detail": "20oz · 5 scoops of ice cream"
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "heading": "Build Your Own Milkshake",
+          "cols": 2,
+          "steps": [
+            {
+              "num": "1",
+              "title": "Choose Your Base",
+              "options": [
+                "Vanilla Ice Cream",
+                "Vegan Ice Cream (upon request)"
+              ]
+            },
+            {
+              "num": "2",
+              "title": "Pick up to 4 Flavours",
+              "options": [
+                "Strawberry",
+                "Banana",
+                "Chocolate",
+                "Biscoff",
+                "Caramel",
+                "Honeycomb",
+                "Lemon Curd",
+                "Dark Cherry",
+                "Raspberry Jam",
+                "Shortbread",
+                "Gingerbread",
+                "Apple Crumble",
+                "Pistachio"
+              ]
+            }
+          ],
+          "footnote": "Extras: Extra Flavour £1.00 · Extra Sauce £1.00 · Extra Topping £1.00"
+        },
+        {
+          "type": "columns",
+          "columns": [
+            {
+              "title": "Classics",
+              "items": [
+                {
+                  "name": "Strawberry Bliss",
+                  "desc": "Fresh strawberries blended with premium vanilla ice cream."
+                },
+                {
+                  "name": "Banana",
+                  "desc": "Fresh banana blended with premium vanilla ice cream."
+                },
+                {
+                  "name": "Chocolate Avalanche",
+                  "desc": "Rich chocolate sauce blended with premium vanilla ice cream."
+                },
+                {
+                  "name": "Biscoff Dream",
+                  "desc": "Biscoff spread blended with premium vanilla ice cream."
+                },
+                {
+                  "name": "Vanilla Bean",
+                  "desc": "Smooth vanilla blended with premium vanilla ice cream."
+                }
+              ]
+            },
+            {
+              "title": "Biscuit Bar",
+              "items": [
+                {
+                  "name": "Jammie Dodger Delight",
+                  "desc": "Raspberry jam and shortbread biscuit."
+                },
+                {
+                  "name": "Cookies & Cream",
+                  "desc": "Shortbread biscuit and chocolate shavings."
+                },
+                {
+                  "name": "Shortbread Heaven",
+                  "desc": "Crushed shortbread biscuit."
+                },
+                {
+                  "name": "Ginger Snap",
+                  "desc": "Crushed gingerbread biscuit."
+                },
+                {
+                  "name": "Millionaire's Dream",
+                  "desc": "Shortbread, caramel and chocolate cream."
+                }
+              ]
+            },
+            {
+              "title": "Cornish Favourites",
+              "items": [
+                {
+                  "name": "Golden Coast Caramel",
+                  "desc": "Luxury caramel and honeycomb."
+                },
+                {
+                  "name": "Honeycomb Heaven",
+                  "desc": "Honeycomb and toffee sauce."
+                },
+                {
+                  "name": "Kernow Crunch",
+                  "desc": "Shortbread, gingerbread and honeycomb."
+                },
+                {
+                  "name": "Orchard Crumble",
+                  "desc": "Cinnamon apple crumble."
+                },
+                {
+                  "name": "Cornish Cream Tea",
+                  "desc": "Strawberry jam, clotted cream and shortbread."
+                }
+              ]
+            },
+            {
+              "title": "Deluxe Shakes",
+              "items": [
+                {
+                  "name": "Pistachio Paradise",
+                  "desc": "Pistachio cream and roasted kataifi."
+                },
+                {
+                  "name": "Desert Gold",
+                  "desc": "Pistachio cream, chocolate and caramel."
+                },
+                {
+                  "name": "Sunshine Splash",
+                  "desc": "Lemon curd and crushed meringue."
+                },
+                {
+                  "name": "Cherry Bomb",
+                  "desc": "Dark cherry compote and chocolate shavings."
+                },
+                {
+                  "name": "Berry Porthleven",
+                  "desc": "Homemade five berry and dark cherry compote."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sundaes",
+      "label": "Sundaes",
+      "schemaName": "Signature Sundaes",
+      "price": "6.95",
+      "blocks": [
+        {
+          "type": "intro",
+          "heading": "The Signature Sundae Collection",
+          "price": "£6.95",
+          "paragraphs": [
+            {
+              "text": "Made fresh to order using award-winning Roskilly's Cornish ice cream. Premium Cornish ice cream, big toppings, maximum indulgence."
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "cols": 3,
+          "items": [
+            {
+              "num": "1",
+              "name": "Strawberry Royale",
+              "desc": "Award-winning vanilla ice cream, strawberry sauce, fresh strawberries & whipped cream."
+            },
+            {
+              "num": "2",
+              "name": "Biscoff Reserve",
+              "desc": "Award-winning vanilla ice cream, Biscoff sauce, Biscoff crumb, whipped cream & Biscoff biscuit."
+            },
+            {
+              "num": "3",
+              "name": "Luxury Caramel",
+              "desc": "Award-winning vanilla ice cream, luxury caramel sauce, honeycomb pieces & Cornish fudge pieces."
+            },
+            {
+              "num": "4",
+              "name": "Galaxy Velvet",
+              "desc": "Award-winning vanilla ice cream, Galaxy chocolate, cookie crumble, chocolate sauce & whipped cream."
+            },
+            {
+              "num": "5",
+              "name": "Twix Indulgence",
+              "desc": "Award-winning vanilla ice cream, Twix pieces, luxury caramel, chocolate sauce & whipped cream."
+            },
+            {
+              "num": "6",
+              "name": "Cookies & Cream",
+              "desc": "Award-winning vanilla ice cream, cookie crumble, chocolate flakes & whipped cream."
+            },
+            {
+              "num": "7",
+              "name": "Lemon Elite",
+              "desc": "Award-winning vanilla ice cream, lemon curd, crushed meringue & whipped cream."
+            },
+            {
+              "num": "8",
+              "name": "Belgian Noir",
+              "desc": "Award-winning vanilla ice cream, Belgian chocolate sauce, chocolate flakes, Cornish fudge & whipped cream."
+            },
+            {
+              "num": "9",
+              "name": "Honeycomb Gold",
+              "desc": "Award-winning vanilla ice cream, honeycomb pieces, chocolate sauce & whipped cream."
+            },
+            {
+              "num": "10",
+              "name": "Berry Velvet",
+              "desc": "Award-winning vanilla ice cream, homemade berry compote, chocolate flakes & whipped cream."
+            },
+            {
+              "num": "11",
+              "name": "Biscoff Apple Crumble",
+              "desc": "Warm cinnamon apples, Biscoff sauce, Biscoff crumb & whipped cream."
+            },
+            {
+              "num": "12",
+              "name": "Pistachio Verde",
+              "desc": "Award-winning vanilla ice cream, pistachio cream, crispy kataifi, chocolate flakes & whipped cream."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "banana-splits",
+      "label": "Banana Splits",
+      "schemaName": "Banana Splits",
+      "price": "6.95",
+      "blocks": [
+        {
+          "type": "intro",
+          "heading": "Banana Splits",
+          "price": "£6.95",
+          "paragraphs": [
+            {
+              "text": "Fresh banana, premium ice cream, loaded toppings — made fresh to order."
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "cols": 3,
+          "items": [
+            {
+              "name": "Biscoff Banana Split",
+              "desc": "Fresh banana, 2 scoops vanilla ice cream, 1 scoop clotted cream, Biscoff sauce, whipped cream, Biscoff crumb."
+            },
+            {
+              "name": "Chocolate Heaven",
+              "desc": "Fresh banana, 2 scoops vanilla ice cream, 1 scoop clotted cream, chocolate sauce, whipped cream, chocolate shavings."
+            },
+            {
+              "name": "Caramel Fudge",
+              "desc": "Fresh banana, 2 scoops vanilla ice cream, 1 scoop clotted cream, caramel sauce, whipped cream, fudge pieces."
+            },
+            {
+              "name": "Berry Delight",
+              "desc": "Fresh banana, 2 scoops vanilla ice cream, 1 scoop clotted cream, berry compote, whipped cream, berry topping."
+            },
+            {
+              "name": "Kids Frenzy",
+              "desc": "Fresh banana, 2 scoops vanilla ice cream, 1 scoop clotted cream, rainbow sprinkles, mini marshmallows, chocolate buttons, whipped cream."
+            },
+            {
+              "name": "Pistachio Dream",
+              "desc": "Fresh banana, 2 scoops vanilla ice cream, pistachio kadaf, whipped cream, pistachio sauce, chocolate sprinkles."
+            },
+            {
+              "name": "Cherry Chocolate",
+              "desc": "Fresh banana, 2 scoops vanilla ice cream, 1 scoop clotted cream, dark cherry compote, chocolate sauce, whipped cream, chocolate curls."
+            },
+            {
+              "name": "Banoffee Bliss",
+              "desc": "Fresh banana, 2 scoops vanilla ice cream, 1 scoop clotted cream, toffee caramel sauce, whipped cream, biscuit crumb."
+            }
+          ]
+        },
+        {
+          "type": "build",
+          "heading": "Build Your Own Banana Split",
+          "price": "£6.95",
+          "text": "Fresh banana, 2 scoops vanilla ice cream, 1 scoop clotted cream, any 3 toppings, any sauce, whipped cream included. Extra toppings £1 each.",
+          "cols": 3,
+          "steps": [
+            {
+              "num": "1",
+              "title": "Choose Your Ice Cream",
+              "options": [
+                "Vanilla",
+                "Chocolate",
+                "Strawberry",
+                "Vegan Vanilla"
+              ]
+            },
+            {
+              "num": "2",
+              "title": "Choose Your Sauce",
+              "options": [
+                "Chocolate",
+                "Biscoff",
+                "Caramel",
+                "Strawberry",
+                "Pistachio"
+              ]
+            },
+            {
+              "num": "3",
+              "title": "Choose Any 3 Toppings",
+              "options": [
+                "Biscoff Crumb",
+                "Chocolate Shavings",
+                "Fudge Pieces",
+                "Honeycomb",
+                "Mini Marshmallows",
+                "Sprinkles",
+                "Chopped Nuts",
+                "Cherry Compote",
+                "Berry Compote"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "footnote",
+          "text": "Loaded with love · made fresh to order · life is better with a banana split"
+        }
+      ]
+    }
+  ]
+}

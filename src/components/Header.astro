@@ -1,0 +1,32 @@
+---
+import site from '../data/site.json';
+
+interface Props {
+  /** Nav key of the current page, so it can be marked as current. */
+  current?: string;
+}
+const { current } = Astro.props;
+---
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="/" class="logo-link" aria-label={`${site.name} home`}>
+      <img src="/images/logo.jpg" alt={site.name} class="logo-img" width="800" height="533" />
+    </a>
+    <nav class="main-nav" id="main-nav">
+      {site.nav.map((item) => (
+        <a
+          href={item.href}
+          class={item.key && item.key === current ? 'is-current' : undefined}
+          aria-current={item.key && item.key === current ? 'page' : undefined}
+        >{item.label}</a>
+      ))}
+      <a href={site.shopUrl} target="_blank" rel="noopener" class="btn btn-gold nav-order">Order Online</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

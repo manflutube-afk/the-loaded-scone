@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import MenuPanel from '../components/MenuPanel.astro';
+import CtaBand from '../components/CtaBand.astro';
+import menu from '../data/menu.json';
+import { menuSchema, breadcrumbSchema, webPageSchema } from '../lib/schema';
+
+const title = 'Menu | Loaded Scones, Milkshakes & Sundaes — The Loaded Scone Co.';
+const description =
+  'The full Loaded Scone Co. menu: sweet loaded scones from £7.95, savoury cheese-scone sandwiches from £8.95, Roskilly’s Cornish ice cream milkshakes, signature sundaes and banana splits. Made fresh to order in Falmouth, Cornwall.';
+
+const base = Astro.site;
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    menuSchema(base, description),
+    breadcrumbSchema(base, [
+      { name: 'Home', path: '/' },
+      { name: 'Menu', path: '/menu/' },
+    ]),
+    webPageSchema(base, { path: '/menu/', name: title, description }),
+  ],
+};
+---
+
+<Base
+  title={title}
+  description={description}
+  current="menu"
+  schema={schema}
+  ogImageAlt="Loaded scones and milkshakes from The Loaded Scone Co., Falmouth"
+>
+  <section class="menu menu-page">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Menu</span>
+      </nav>
+      <p class="eyebrow center">Fresh, Loaded, Handmade Daily</p>
+      <h1 class="section-title center">Our Full Menu</h1>
+      <p class="menu-page-intro">
+        Everything we make, made fresh to order in St Georges Arcade, Falmouth. Sweet and
+        savoury loaded scones, thick Roskilly&rsquo;s Cornish ice cream milkshakes, signature
+        sundaes and banana splits. Gluten-free scones and vegan options available on request
+        &mdash; please speak to a member of staff regarding allergies.
+      </p>
+
+      <div class="menu-anchor" id="menu-anchor" aria-hidden="true"></div>
+      <div class="menu-tabs" id="menu-tabs" role="tablist" aria-label="Menu sections">
+        {menu.sections.map((section, i) => (
+          <button
+            class={i === 0 ? 'tab-btn active' : 'tab-btn'}
+            data-tab={section.id}
+            id={`tabbtn-${section.id}`}
+            type="button"
+            role="tab"
+            aria-controls={`tab-${section.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+          >{section.label}</button>
+        ))}
+      </div>
+
+      {menu.sections.map((section, i) => <MenuPanel section={section} active={i === 0} />)}
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

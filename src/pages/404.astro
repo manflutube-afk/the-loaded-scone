@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Page Not Found | The Loaded Scone Co.';
+const description =
+  "Sorry, we couldn't find that page. Head back to The Loaded Scone Co. home page or browse our full menu.";
+---
+
+<Base title={title} description={description} noindex>
+  <section class="error-page">
+    <div class="container">
+      <p class="eyebrow center">Error 404</p>
+      <h1>That page has been eaten.</h1>
+      <p>We couldn&rsquo;t find the page you were after &mdash; but there&rsquo;s plenty left on the counter.</p>
+      <div class="hero-actions">
+        <a href="/" class="btn btn-gold">Back to Home</a>
+        <a href="/menu/" class="btn btn-outline">View the Menu</a>
+      </div>
+    </div>
+  </section>
+</Base>

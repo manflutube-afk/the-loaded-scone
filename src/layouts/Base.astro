@@ -1,0 +1,90 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/style.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Nav key of the current page. */
+  current?: string;
+  /** Alt text for the social sharing image. */
+  ogImageAlt?: string;
+  /** Set for pages that should not be indexed. */
+  noindex?: boolean;
+  /** JSON-LD structured data for this page. */
+  schema?: unknown;
+  /** Extra tags for <head>. */
+  preload?: string;
+}
+
+const {
+  title,
+  description,
+  current,
+  ogImageAlt = 'A loaded scone from The Loaded Scone Co. in Falmouth, Cornwall',
+  noindex = false,
+  schema,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/images/social-share.jpg', Astro.site).href;
+---
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+  <meta name="theme-color" content="#0a0908" />
+  <meta name="geo.region" content="GB-CON" />
+  <meta name="geo.placename" content="Falmouth, Cornwall" />
+
+  <link rel="icon" href="/images/favicon.jpg" type="image/jpeg" />
+  <link rel="apple-touch-icon" href="/images/logo.jpg" />
+
+  <!-- Social sharing preview (Open Graph / Twitter Card) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Loaded Scone Co." />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={ogImageAlt} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <slot name="head" />
+
+  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />}
+</head>
+<body>
+
+<Header current={current} />
+
+<main id="main">
+  <slot />
+</main>
+
+<Footer />
+
+<slot name="after" />
+
+<script>
+  import '../scripts/main.js';
+</script>
+</body>
+</html>

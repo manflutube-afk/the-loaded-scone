@@ -1,0 +1,25 @@
+{
+  "name": "The Loaded Scone Co.",
+  "alternateName": "The Loaded Scone Company",
+  "shopUrl": "https://www.theloadedsconeco.co.uk/shop/",
+  "email": "Treatme@theloadedsconeco.co.uk",
+  "address": {
+    "street": "1 St Georges Arcade",
+    "locality": "Falmouth",
+    "region": "Cornwall",
+    "postcode": "TR11 3DH",
+    "country": "GB"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/theloadedsconeco/",
+    "facebook": "https://www.facebook.com/theloadedsconeco/",
+    "tiktok": "https://www.tiktok.com/@theloadedsconeco"
+  },
+  "nav": [
+    { "label": "Our Story", "href": "/#about" },
+    { "label": "Menu", "href": "/menu/", "key": "menu" },
+    { "label": "Gallery", "href": "/#gallery" },
+    { "label": "What's On", "href": "/#whats-on" },
+    { "label": "Find Us", "href": "/#find-us" }
+  ]
+}

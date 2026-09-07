@@ -1,168 +1,155 @@
 # The Loaded Scone Co.
 
-Static site for The Loaded Scone Co., 1 St Georges Arcade, Falmouth, deployed to
-Cloudflare as a **Worker with static assets** (the successor to Cloudflare Pages —
-same idea, current product).
+Website for The Loaded Scone Co., 1 St Georges Arcade, Falmouth.
 
-`public/` is the deploy root — everything in it is served at the site root, nothing
-outside it is published. There is no Worker script; files are served directly.
+Built with [Astro](https://astro.build) and deployed to Cloudflare as a **Worker with
+static assets**. `npm run build` turns `src/` into pre-rendered HTML in `dist/`, and
+Cloudflare serves that. Pages are built ahead of time, so they load as fast as plain
+HTML — the build exists so the source stays maintainable, not to slow anything down.
 
 ```
-public/
-  index.html              home page              → /
-  menu/index.html         the full menu          → /menu/
-  404.html                not-found page
-  style.css               one stylesheet, shared by every page
-  script.js               one script, shared by every page
-  robots.txt
-  sitemap.xml
-  _headers                cache + security headers (parsed by Cloudflare, not served)
-  images/                 all photography and logos
-  audio/witch-laugh.mp3   the "What's On" spooky reveal sound
+src/
+  data/
+    site.json          address, email, socials, nav — the one place to change them
+    menu.json          the entire menu: every section, item and price
+  layouts/Base.astro   <head>, meta tags, header + footer, script — written once
+  components/
+    Header.astro       site header and nav
+    Footer.astro       footer
+    CtaBand.astro      "Fresh. Loaded. Just for you." band
+    MenuPanel.astro    renders one menu tab from menu.json
+  lib/schema.js        Schema.org structured data, generated from the data files
+  pages/
+    index.astro        home page                → /
+    menu.astro         the full menu            → /menu/
+    404.astro          not-found page
+    sitemap.xml.js     generates /sitemap.xml
+  scripts/main.js      nav toggle, menu tabs, lightbox, seasonal reveal
+  styles/style.css     the whole stylesheet
+
+public/                copied to the site root as-is
+  images/  audio/  robots.txt  _headers
+
+dist/                  build output — git-ignored, never edit by hand
 ```
 
-No build step. Edit the HTML/CSS/JS directly, commit, and Cloudflare rebuilds.
-
-## Local preview
+## Local development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Serves at `http://localhost:8787` by default (`npm run dev -- --port 8796` to pick a port).
-This runs Cloudflare's own runtime, so `/menu/`, the 404 page and `_headers` all behave
-exactly as they will in production.
+Astro's dev server runs at `http://localhost:4321` with live reload — save a file and
+the browser updates.
+
+To check the real production build under Cloudflare's own runtime (so `/menu/`, the
+404 page and `_headers` behave exactly as they will live):
+
+```bash
+npm run build && npm run serve
+```
 
 ## Deploying
 
-### Git integration (how this is set up)
+Pushing to `main` deploys automatically. The Cloudflare project is connected to
+`manflutube-afk/the-loaded-scone`; other branches get preview URLs.
 
-The Cloudflare project is connected to `manflutube-afk/the-loaded-scone`. Every push to
-`main` builds and deploys automatically; other branches get preview URLs.
-
-The build configuration in the Cloudflare dashboard is:
+The build configuration in the Cloudflare dashboard must be:
 
 | Field | Value |
 | --- | --- |
-| Build command | *(none)* |
+| Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
 | Version command | `npx wrangler versions upload` |
 | Root directory | `/` |
 
-There is no build step — `wrangler deploy` just uploads `public/`. All the routing
-configuration lives in `wrangler.toml`, so the dashboard needs nothing else.
-
-### Deploying by hand
+To deploy by hand instead:
 
 ```bash
 npm run deploy
 ```
 
-### A note on Pages vs Workers
-
-This started out configured for Cloudflare Pages (`pages_build_output_dir`), but the
-dashboard now creates **Workers** projects by default, and `wrangler deploy` refuses a
-Pages config — which is what made the first build fail. `wrangler.toml` now uses the
-Workers `[assets]` block instead. Behaviour is the same, `_headers` and `_redirects`
-are supported either way, and Workers is the actively developed product.
-
-## The menu page
-
-The full menu lives at `/menu/` as its own page, so it can be linked, bookmarked,
-printed and indexed by Google on its own. The home page carries a short preview
-section that links into it.
-
-Each menu tab is deep-linkable — these URLs open the page with that tab already
-selected, which is what the home-page preview cards link to:
-
-- `/menu/#sweet`
-- `/menu/#savoury`
-- `/menu/#milkshakes`
-- `/menu/#sundaes`
-- `/menu/#banana-splits`
-
-Clicking a tab also updates the address bar, so any tab can be copied and shared.
-
 ## Editing the menu
 
-`public/menu/index.html` is the only place menu items live. Each tab is a
-`<div class="tab-panel" id="tab-...">` block; items inside are `.menu-card` blocks:
+**`src/data/menu.json` is the whole menu.** Change it and everything updates: the page,
+the tab bar, and the structured data Google reads. You never have to touch HTML.
 
-```html
-<div class="menu-card"><h4><span class="num">11</span> New Scone Name</h4><p>Its toppings.</p></div>
+Each section has an `id`, a `label` (the tab text), a `price` (used for that section's
+structured data) and a list of `blocks` rendered in order. A block is one of:
+
+| Block | What it renders |
+| --- | --- |
+| `intro` | The section heading, price pill, blurb, tick list, milkshake size boxes |
+| `cards` | The grid of item cards (`cols: 2` or `3`) |
+| `build` | A "Build Your Own" panel with numbered steps |
+| `columns` | The four-column milkshake flavour lists |
+| `extras` | The "extras" boxes at the bottom of a section |
+| `footnote` | The small print line |
+
+To add a sweet scone, add one entry to that section's `cards` block:
+
+```json
+{ "num": "11", "name": "New Scone Name", "desc": "What goes on it." }
 ```
 
-Add `class="menu-card featured"` and a `<span class="tag">Best Seller</span>` inside
-the `<h4>` to highlight one.
+Add `"featured": true` and `"tag": "Best Seller"` to highlight it. To change a price,
+edit the `price` on the section's `intro` block (what customers see) and the section's
+top-level `price` (what Google is told) — they are separate because the pill can read
+`from £6.95` while the structured data needs a bare number.
 
-If you add, remove or reprice items, also update the matching entry in the
-`application/ld+json` block in that file's `<head>` — that is the structured data
-Google reads to show your menu in search results. It currently lists all 57 items
-with their prices.
+## Editing everything else
+
+- **Address, email, social links, nav** — `src/data/site.json`. They appear in the
+  header, footer and structured data automatically.
+- **Home page copy** — `src/pages/index.astro`.
+- **Seasonal "What's On"** — in `src/pages/index.astro`, between the
+  `SEASONAL CARD START` / `SEASONAL CARD END` comments. Swap the `.season-card` block
+  each season; the blurred tap-to-reveal and the sound come along automatically.
+- **Styling** — `src/styles/style.css`.
 
 ## SEO
 
-Already in place:
-
-- Unique `<title>`, meta description and `<link rel="canonical">` on each page.
-- Open Graph and Twitter card tags pointing at `/images/social-share.jpg` (1200×630).
-- Schema.org structured data: `Restaurant` (with address and social profiles) plus
-  `WebSite` on the home page; `Menu` with all 57 items and prices, plus a
-  `BreadcrumbList`, on the menu page.
-- `sitemap.xml` and `robots.txt`.
-- Descriptive `alt` text, explicit `width`/`height` on every image (prevents layout
-  shift), and lazy loading below the fold.
-- One `<h1>` per page, a skip-to-content link, and ARIA roles on the menu tabs.
+- Unique `<title>`, meta description and canonical URL per page.
+- Open Graph and Twitter cards using `/images/social-share.jpg` (1200×630).
+- Schema.org JSON-LD **generated from the data files**, so it cannot drift out of sync
+  with the page: `Restaurant` and `WebSite` on the home page; `Menu` with all 57 items
+  and their prices, plus `BreadcrumbList`, on the menu page.
+- `sitemap.xml` generated at build time from the list of real pages.
+- Descriptive `alt` text, explicit `width`/`height` on every image, lazy loading below
+  the fold, one `<h1>` per page, a skip link, and ARIA roles on the menu tabs.
+- CSS is fingerprinted by the build (`/_astro/index.<hash>.css`) and cached for a year
+  via `_headers`; a new build gets a new filename, so there is nothing to purge.
 
 ### If the site moves to a different domain
 
-Every absolute URL uses `https://www.theloadedsconeco.co.uk`. If the site ends up on
-a different domain, find and replace that string across `public/` — it appears in the
-canonical tags, Open Graph tags, structured data, `robots.txt` and `sitemap.xml`.
+Change `site` in `astro.config.mjs`. That single value feeds every canonical URL, Open
+Graph tag, structured-data URL and the sitemap.
 
 ### Google Search Console
 
-1. Go to [Google Search Console](https://search.google.com/search-console) and add the
-   site as a **Domain** property (verified with a DNS TXT record — Cloudflare makes
-   this easy since it already hosts the DNS) or as a **URL prefix** property.
-2. Under **Sitemaps**, submit: `sitemap.xml`
-3. Use **URL Inspection → Request indexing** on `/` and `/menu/` to get them crawled
-   sooner than the normal schedule.
-4. Check **Enhancements → Merchant listings / Structured data** after a few days to
-   confirm the menu markup was picked up. You can test it any time with the
+1. Add the site at [Search Console](https://search.google.com/search-console) as a
+   **Domain** property (DNS TXT verification — easy since Cloudflare hosts the DNS).
+2. Under **Sitemaps**, submit `sitemap.xml`.
+3. **URL Inspection → Request indexing** on `/` and `/menu/` to be crawled sooner.
+4. Check the menu markup with the
    [Rich Results Test](https://search.google.com/test/rich-results).
 
-Also worth doing, and worth more than anything on-page for a shop like this: claim and
-fill in the **Google Business Profile** for the Falmouth address, and set its menu link
-to `https://www.theloadedsconeco.co.uk/menu/`.
+Worth more than anything on-page for a shop: claim the **Google Business Profile** for
+the Falmouth address and point its menu link at `https://www.theloadedsconeco.co.uk/menu/`.
 
 ### Not filled in yet
 
-Two things were deliberately left out of the structured data rather than guessed at,
-because wrong data is worse than none:
+Left out of the structured data on purpose, because wrong data is worse than none:
 
-- **Opening hours** — add an `openingHoursSpecification` block to the `Restaurant`
-  schema in `public/index.html`, and consider showing them in the "Find Us" section.
-- **Phone number** — the site currently says "call in store for the full number".
-  Add a `telephone` field to the same schema once you want it public.
+- **Opening hours** — add an `openingHoursSpecification` to `businessSchema()` in
+  `src/lib/schema.js`, and consider showing them in the "Find Us" section.
+- **Phone number** — the site says "call in store for the full number". Add a
+  `telephone` field to the same function when you want it public.
 
-## Seasonal "What's On"
+## History
 
-`public/index.html` has a clearly marked block:
-
-```html
-<!-- SEASONAL CARD START ... -->
-...
-<!-- SEASONAL CARD END -->
-```
-
-Swap the `.season-card` inside it each season. The blurred tap-to-reveal behaviour and
-the sound come along automatically.
-
-## The original single-file version
-
-This site started as one 2.8 MB `loaded-scone-co-index.html` with the CSS, JavaScript
-and every image base64-embedded in it. That file is still on disk as a backup but is
-**git-ignored and not deployed** — it is superseded, and editing it would do nothing.
-Delete it whenever you're happy with the split version.
+This started as a single 2.8 MB `loaded-scone-co-index.html` with inline CSS and
+JavaScript and every image base64-embedded. That file is still on disk as a backup but
+is **git-ignored and not deployed** — it is superseded, and editing it does nothing.
+Delete it whenever you're happy.

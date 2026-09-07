@@ -1,0 +1,106 @@
+---
+/* Renders one menu tab panel from its data blocks, in order. Block types come
+   from src/data/menu.json: intro, cards, extras, build, columns, footnote. */
+interface Props {
+  section: any;
+  active: boolean;
+}
+const { section, active } = Astro.props;
+---
+
+<div
+  class={active ? 'tab-panel active' : 'tab-panel'}
+  id={`tab-${section.id}`}
+  role="tabpanel"
+  aria-labelledby={`tabbtn-${section.id}`}
+>
+  {section.blocks.map((block: any) => (
+    <>
+      {block.type === 'intro' && (
+        <div class="menu-intro">
+          <h3>{block.heading}{block.price && <span class="price-pill">{block.price}</span>}</h3>
+          {block.paragraphs?.map((p: any) => <p class={p.class}>{p.text}</p>)}
+          {block.included && (
+            <div class="included-row">
+              {block.included.map((i: string) => <span>✓ {i}</span>)}
+            </div>
+          )}
+          {block.sizes && (
+            <div class="size-row">
+              {block.sizes.map((s: any) => (
+                <div class="size-box">
+                  <span class="size-name">{s.name}</span>
+                  <span class="size-price">{s.price}</span>
+                  <span class="size-detail">{s.detail}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {block.type === 'cards' && (
+        <div class={block.cols === 3 ? 'menu-grid three-col' : 'menu-grid'}>
+          {block.items.map((it: any) => (
+            <div class={it.featured ? 'menu-card featured' : 'menu-card'}>
+              <h4>
+                {it.num && <span class="num">{it.num}</span>}
+                {it.name}
+                {it.tag && <span class="tag">{it.tag}</span>}
+              </h4>
+              <p>{it.desc}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {block.type === 'build' && (
+        <div class="build-your-own">
+          <h3>{block.heading}{block.price && <span class="price-pill">{block.price}</span>}</h3>
+          {block.text && <p>{block.text}</p>}
+          <div class={block.cols === 2 ? 'steps-grid two-col' : 'steps-grid'}>
+            {block.steps.map((s: any) => (
+              <div class="step">
+                <span class="step-num">{s.num}</span>
+                <h5>{s.title}{s.price && <span class="price-pill small">{s.price}</span>}</h5>
+                <p>{s.options.join(' · ')}</p>
+              </div>
+            ))}
+          </div>
+          {block.footnote && <p class="menu-footnote">{block.footnote}</p>}
+        </div>
+      )}
+
+      {block.type === 'columns' && (
+        <div class="menu-columns">
+          {block.columns.map((c: any) => (
+            <div class="menu-col">
+              <h4>{c.title}</h4>
+              <ul class="text-list">
+                {c.items.map((i: any) => <li><strong>{i.name}</strong> &mdash; {i.desc}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {block.type === 'extras' && (
+        <div class="menu-extras">
+          {block.boxes.map((b: any) => (
+            <div class={b.highlight ? 'extra-box highlight' : 'extra-box'}>
+              <h4>{b.title}{b.price && <span class="price-pill small">{b.price}</span>}</h4>
+              {b.text && <p>{b.text}</p>}
+              {b.list && (
+                <ul class="extra-list">
+                  {b.list.map((l: any) => <li>{l.label} <span>{l.price}</span></li>)}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {block.type === 'footnote' && <p class="menu-footnote">{block.text}</p>}
+    </>
+  ))}
+</div>
